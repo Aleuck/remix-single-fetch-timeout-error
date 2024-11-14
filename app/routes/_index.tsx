@@ -1,4 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
+import { defer } from "@remix-run/node";
 import { Await, useLoaderData } from "@remix-run/react";
 import { Suspense } from "react";
 export const meta: MetaFunction = () => {
@@ -15,10 +16,10 @@ export async function loader() {
     }, 5_500);
   });
 
-  return {
+  return defer({
     sync: { data: true },
     async: promise,
-  };
+  });
 }
 
 export default function Index() {
